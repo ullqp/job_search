@@ -6,7 +6,8 @@ from src.vacancies import Vacancies
 
 
 def test_init_reader_json(reader_json: Reader_JSON):
-    assert reader_json.file_path == 'data\\vacancies.json'
+    assert reader_json.file_path == "data\\vacancies.json"
+
 
 def test_read_vacancies_success() -> None:
     # Мокаем содержимое файла — список вакансий
@@ -14,19 +15,17 @@ def test_read_vacancies_success() -> None:
         {
             "name": "Python Developer",
             "url": "https://example.com/vacancy1",
-            "salary": "100000 р"
-,
+            "salary": "100000 р",
             "description": "Работа с Python",
-            "currency": "USD"
+            "currency": "USD",
         },
         {
             "name": "Data Scientist",
             "url": "https://example.com/vacancy2",
-            "salary": "120000 р"
-,
+            "salary": "120000 р",
             "description": "Аналитика данных",
-            "currency": "USD"
-        }
+            "currency": "USD",
+        },
     ]
     mock_json = json.dumps(mock_data)
 
@@ -52,7 +51,7 @@ def test_add_vacancy_already_exists() -> None:
         description="Описание",
     )
 
-    with patch.object(manager, 'read_vacancies', return_value=[existing_vacancy]):
+    with patch.object(manager, "read_vacancies", return_value=[existing_vacancy]):
         # Создаем новую вакансию с тем же URL
         new_vacancy = Vacancies(
             name="New Vacancy",
@@ -68,7 +67,7 @@ def test_add_vacancy_already_exists() -> None:
 def test_add_new_vacancy_success() -> None:
     manager = Reader_JSON("fake_path.json")
 
-    with patch.object(manager, 'read_vacancies', return_value=[]):
+    with patch.object(manager, "read_vacancies", return_value=[]):
         new_vacancy = Vacancies(
             name="New Vacancy",
             vacancies_url="https://example.com/vacancy2",
@@ -90,7 +89,7 @@ def test_delete_vacancy() -> None:
         Vacancies("Вакансия 1", "https://example.com/vacancy1", "100000", "Описание 1"),
         Vacancies("Вакансия 2", "https://example.com/vacancy2", "120000", "Описание 2"),
     ]
-    with patch.object(manager, 'read_vacancies', return_value=existing_vacancies):
+    with patch.object(manager, "read_vacancies", return_value=existing_vacancies):
         vacancy_to_delete = Vacancies("Вакансия 2", "https://example.com/vacancy2", "120000", "Описание 2")
         written_contents = []
 
@@ -101,11 +100,13 @@ def test_delete_vacancy() -> None:
 
             assert result is True
             import os
-            m_open.assert_called_once_with(os.path.join('data', 'fake_path.json'), 'w', encoding='utf-8')
+
+            m_open.assert_called_once_with(os.path.join("data", "fake_path.json"), "w", encoding="utf-8")
 
             # Объединяем все записанные строки и парсим как JSON
-            json_str = ''.join(written_contents)
+            json_str = "".join(written_contents)
             import json
+
             data_loaded = json.loads(json_str)
 
             # Проверка отсутствия удаленной вакансии

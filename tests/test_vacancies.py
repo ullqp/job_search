@@ -24,27 +24,19 @@ def test_cast_to_object_list() -> None:
             "name": "Разработчик",
             "alternate_url": "https://example.com/vacancy/1",
             "snippet": {"requirement": "Опыт работы от 3 лет"},
-            "salary": {
-                "from": 100000,
-                "to": 150000,
-                "currency": "RUB"
-            }
+            "salary": {"from": 100000, "to": 150000, "currency": "RUB"},
         },
         {
             "name": "Дизайнер",
             "alternate_url": "https://example.com/vacancy/2",
             # Без snippet
-            "salary": {
-                "from": 80000,
-                "to": 120000,
-                "currency": "RUB"
-            }
+            "salary": {"from": 80000, "to": 120000, "currency": "RUB"},
         },
         {
             "name": "Менеджер",
             "alternate_url": "https://example.com/vacancy/3",
             # Без salary
-        }
+        },
     ]
 
     vacancies = Vacancies.cast_to_object_list(json_data)

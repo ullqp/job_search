@@ -1,5 +1,6 @@
 from src.vacancies import Vacancies
 
+
 def sort_vacancies(vacancies_list: list[Vacancies]) -> list[Vacancies]:
     """
     Сортировка вакансий по уменьшению зарплаты.
@@ -20,12 +21,12 @@ def filter_vacancies(vacancies_list: list[Vacancies], filter_words: list[str]) -
 
     for vacancy in vacancies_list:
         # Попытка получить requirement и responsibility
-        requirement = getattr(vacancy, 'requirement', '') or ''
-        responsibility = getattr(vacancy, 'responsibility', '') or ''
+        requirement = getattr(vacancy, "requirement", "") or ""
+        responsibility = getattr(vacancy, "responsibility", "") or ""
 
         # Если этих атрибутов нет, используем description
         if not requirement and not responsibility:
-            description_text = getattr(vacancy, 'description', '') or ''
+            description_text = getattr(vacancy, "description", "") or ""
             full_text = description_text.lower()
         else:
             full_text = f"{requirement} {responsibility}".lower()

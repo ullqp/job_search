@@ -1,6 +1,7 @@
-from src.utils import filter_vacancies, sort_vacancies, get_top_vacancies, print_vacancies
 from src.hh_api import HH_API
+from src.utils import filter_vacancies, get_top_vacancies, print_vacancies, sort_vacancies
 from src.vacancies import Vacancies
+
 
 def user_interaction() -> None:
     """

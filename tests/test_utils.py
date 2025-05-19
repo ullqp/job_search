@@ -1,5 +1,5 @@
+from src.utils import filter_vacancies, get_top_vacancies, print_vacancies, sort_vacancies
 from src.vacancies import Vacancies
-from src.utils import sort_vacancies, print_vacancies, get_top_vacancies, filter_vacancies
 
 
 def test_sort_vacancies(vacancies_list: list[Vacancies]) -> None:

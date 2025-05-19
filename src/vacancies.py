@@ -31,14 +31,29 @@ class Vacancies:
         self.currency = self.__validate_salary(salary)[1]
         self.description = description
 
-
     def __str__(self) -> str:
-        return (f"Vacancies(name={self.name!r}, url={self.vacancies_url!r}, "
-                f"salary={self.salary!r}, description={self.description!r})")
+        return (
+            f"Vacancies(name={self.name!r}, url={self.vacancies_url!r}, "
+            f"salary={self.salary!r}, description={self.description!r})"
+        )
 
     def __repr__(self) -> str:
-        return (f"Vacancies(name={self.name!r}, url={self.vacancies_url!r}, "
-                f"salary={self.salary!r}, description={self.description!r})")
+        return (
+            f"Vacancies(name={self.name!r}, url={self.vacancies_url!r}, "
+            f"salary={self.salary!r}, description={self.description!r})"
+        )
+
+    def __lt__(self, other) -> bool:
+        """Проверка, что текущая зарплата меньше другой."""
+        if not isinstance(other, Vacancies):
+            return NotImplemented
+        return self.salary < other.salary
+
+    def __gt__(self, other) -> bool:
+        """Проверка, что текущая зарплата больше другой."""
+        if not isinstance(other, Vacancies):
+            return NotImplemented
+        return self.salary > other.salary
 
     def __validate_salary(self, salary: str) -> tuple[float, str]:
         """
@@ -109,9 +124,9 @@ class Vacancies:
             # Обработка зарплаты
             salary_data = item.get("salary")
             if salary_data:
-                from_salary = salary_data.get('from')
-                to_salary = salary_data.get('to')
-                currency = salary_data.get('currency', 'RUB')
+                from_salary = salary_data.get("from")
+                to_salary = salary_data.get("to")
+                currency = salary_data.get("currency", "RUB")
                 if from_salary is not None and to_salary is not None:
                     salary_str = f"{from_salary}-{to_salary} {currency}"
                 elif from_salary is not None:
@@ -124,12 +139,7 @@ class Vacancies:
                 salary_str = "0"
 
             # Создаем объект вакансии
-            vacancy = cls(
-                name=name,
-                vacancies_url=url,
-                salary=salary_str,
-                description=description
-            )
+            vacancy = cls(name=name, vacancies_url=url, salary=salary_str, description=description)
             result.append(vacancy)
 
         return result

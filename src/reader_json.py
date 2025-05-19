@@ -1,9 +1,9 @@
 import json
 import os
+from unittest.mock import MagicMock, mock_open, patch
 
 from src.abc_reader_json import Reader_ABC
 from src.vacancies import Vacancies
-from unittest.mock import patch, mock_open, MagicMock
 
 
 class Reader_JSON(Reader_ABC):
@@ -33,7 +33,6 @@ class Reader_JSON(Reader_ABC):
         """
 
         return self.__file_path
-
 
     def read_vacancies(self) -> list[Vacancies]:
         """
