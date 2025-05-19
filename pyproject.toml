@@ -3,14 +3,52 @@ name = "job-search"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Baranova.K",email = "waynaungelneal@gmail.com"}
+    {name = "Baranova.K", email = "waynaungelneal@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "pytest (>=8.3.5,<9.0.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "job-search"
+version = "0.1.0"
+description = ""
+authors = ["Baranova.K <waynaungelneal@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "your_package_name" }
+]
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.15.0"
+flake8 = "^7.2.0"
+black = "^25.1.0"
+isort= "^6.0.1"
+pytest-cov = "^6.1.1"
+
+[tool.black]
+line-length=119
+exclude='''/\.git/'''
+
+[tool.isort]
+line_length=119
+
+[tool.mypy]
+disallow_untyped_defs=true
+warn_return_any=true
+exclude='venv'
+
+[tool.flake8]
+max-line-length = 119
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]  # Где искать тесты
+python_files = "test_*.py"  # Какие файлы считать тестами
+python_functions = "test_*"
